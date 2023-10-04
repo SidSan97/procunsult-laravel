@@ -10,13 +10,27 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
+                <x-label for="name" value="{{ __('Nome') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            </div>
+
+            <div>
+                <x-label for="cpf" value="{{ __('Cpf') }}" />
+                <x-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required autofocus autocomplete="cpf" />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="nivel" value="{{ __('Nivel') }}" />
+                <select id="nivel" class="block mt-1 w-full" name="nivel" required autofocus>
+                    <option value=""> </option>
+                    <option value="Cliente">Cliente</option>
+                    <option value="Colaborador">Colaborador</option>
+                </select>
             </div>
 
             <div class="mt-4">
@@ -28,6 +42,7 @@
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
+
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
