@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CriarChamadoController;
+use App\Http\Controllers\ResponderChamadoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +20,8 @@ Route::get('/', function () {
 });
 
 Route::post('/enviar-chamado',[CriarChamadoController::class, 'abrirChamado']);
-
 Route::get('/abrir-chamado',[CriarChamadoController::class, 'index']);
+Route::get('/responder-chamado',[ResponderChamadoController::class, 'obterDados']);
 
 Route::middleware([
     'auth:sanctum',
