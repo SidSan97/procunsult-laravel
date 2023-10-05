@@ -37,6 +37,7 @@
 			</thead>
 
             <tbody>
+                @if(isset($chamados))
                 @foreach($chamados as $chamado)
                     <tr>
                         <td>{{$chamado->titulo}}</td>
@@ -67,15 +68,14 @@
                                 </div>
 
                                 <div class="modal-body">
-                                    <form action="/editar-chamado" method="post">
+                                    <form action="/editar-chamado/<?=$chamado->id?>" method="post">
                                         @csrf
+                                        @method('PUT')
                                         <strong>STATUS: {{$chamado->status }}</strong>
                                         <div class="mb-3">
                                             <label for="titulo" class="form-label">Titulo</label>
                                             <input type="text" class="form-control" id="titulo" name="titulo" readonly value="<?= $chamado->titulo ?>">
                                         </div>
-
-                                        <input type="hidden" name="valor" value="<?= $chamado->id ?>">
 
                                         <div class="mb-3">
                                             <label for="descricao" class="form-label">Descrição</label>
@@ -87,7 +87,7 @@
                                         <div class="mb-3">
                                             <label for="exampleFormControlTextarea1" class="form-label">Resposta para o chamado</label>
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="resposta" required <?php if($chamado->status == "Finalizado"):?> readonly <?php endif?>>
-                                                {{ $chamado->descricao }}
+                                                {{ $chamado->resposta }}
                                             </textarea>
                                         </div>
 
@@ -124,6 +124,7 @@
                         </div>
                     </div>
                 @endforeach
+                @endif
             </tbody>
         </table>
 
