@@ -48,7 +48,7 @@
 
     <br>
 
-    <button type="submit" class="btn btn-warning"><a href="home" class="text-dark">Voltar</a></button>
+    <button type="submit" class="btn btn-warning"><a href="/" class="text-dark">Voltar</a></button>
 </div>
 
 <!-- Bootstrap -->
