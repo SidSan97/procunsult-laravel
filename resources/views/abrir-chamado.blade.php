@@ -14,6 +14,18 @@
 
     <h2 align="center">Abertura de chamado</h2> <br>
 
+    @if(isset($jsonData))
+        @if(json_decode($jsonData)->status == 200)
+            <div class="mt-4 alert alert-success" role="alert">
+                <span class="text-dark">{{ json_decode($jsonData)->message }}</span>
+            </div>
+        @else
+            <div class="mt-4 alert alert-danger" role="alert">
+                <span class="text-dark">{{ json_decode($jsonData)->message }}</span>
+            </div>
+        @endif
+    @endif
+
     <form action="/enviar-chamado" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
@@ -28,7 +40,7 @@
 
         <div class="form-group mb-4">
             <label for="file">Escolher arquivos</label> <br>
-            <input type="file" class="form-control-file" name="file" multiple id="file">
+            <input type="file" class="form-control-file" name="file[]" multiple id="file">
         </div>
 
         <button type="submit" name="enviar" class="btn btn-primary">Enviar</button>

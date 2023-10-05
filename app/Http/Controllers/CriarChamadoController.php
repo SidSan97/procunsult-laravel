@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnexoModel;
 use App\Models\CriarChamadoModel;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,6 @@ class CriarChamadoController extends Controller
 
     }
 
-
     public function abrirChamado(Request $request) {
 
         $user = new CriarChamadoModel();
@@ -23,27 +23,58 @@ class CriarChamadoController extends Controller
         $user->resposta  = $request->resposta;
         $user->status    = "Aberto";
 
-        //$user->file = $requestName;
-
         if($user->save()) {
 
-            if ($request->hasFile('file'))
-                $this->upload($request->file);
-            dd('inseriu');
+            if ($request->hasFile('file')) {
+
+                $id = $user->id;
+                $qtdArquivos = sizeof($request->file);
+                $arquivos    = $request->file;
+
+                $this->upload($id, $arquivos, $qtdArquivos);
+            }
+
+            $response = [
+                'status' => 200,
+                'message' => "Chamado aberto com sucesso",
+            ];
+
+            return view('abrir-chamado')->with('jsonData', json_encode($response));
+
+        } else {
+
+            $response = [
+                'status' => 500,
+                'message' => "Erro ao processar a operação.",
+            ];
+
+            return view('abrir-chamado')->with('jsonData', json_encode($response));
+
         }
-        else
-        dd('nada');
+
     }
 
-    public function upload($file)
+    public function upload($id, $file, $tam)
     {
-        //dd($file);
-        $requestFile = $file;
 
-        $extension = $requestFile->extension();
+        for($i = 0; $i<$tam; $i++)
+        {
+            $requestFile = $file[$i];
 
-        $requestName = md5($requestFile->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $extension   = $requestFile->extension();
 
-        $file->move(public_path('uploads'), $requestName);
+            $requestName = md5($requestFile->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $file[$i]->move(public_path('uploads'), $requestName);
+
+            $anexos = new AnexoModel();
+            $anexos->chamado_id = $id;
+            $anexos->nome_anexo = $requestName;
+
+            $anexos->save();
+        }
+
+        return;
+
     }
 }
