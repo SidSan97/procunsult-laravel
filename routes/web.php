@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CriarChamadoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::post('/enviar-chamado',[CriarChamadoController::class, 'abrirChamado']);
+
+Route::get('/abrir-chamado',[CriarChamadoController::class, 'index']);
 
 Route::middleware([
     'auth:sanctum',
