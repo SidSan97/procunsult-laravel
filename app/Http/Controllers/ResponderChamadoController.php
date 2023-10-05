@@ -38,10 +38,14 @@ class ResponderChamadoController extends Controller
 
             $response = [
                 'status' => 200,
-                'message' => "Chamado aberto com sucesso",
+                'message' => "Reposta enviada com sucesso",
             ];
 
-            return view('responder-chamado')->with('jsonData', json_encode($response));
+            /*return response()->json([
+                "jsonData" => $response
+            ], 200);*/
+
+            return redirect('/responder-chamado?q=enviado')->with('jsonData', json_encode($response));
 
             }else {
 
@@ -50,7 +54,11 @@ class ResponderChamadoController extends Controller
                     'message' => "Erro ao processar a operação.",
                 ];
 
-                return view('responder-chamado')->with('jsonData', json_encode($response));
+                /*return response()->json([
+                "jsonData" => $response
+                    ], 500);*/
+
+                return view('/responder-chamado')->with('jsonData', json_encode($response));
             }
         }
 

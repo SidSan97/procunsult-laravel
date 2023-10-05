@@ -12,14 +12,14 @@
     <div class="container">
         <h2 align="center">Listar chamados</h2> <br>
 
-        @if(isset($jsonData))
-            @if(json_decode($jsonData)->status == 200)
+        @if(isset($_GET['q']))
+            @if($_GET['q'] == "enviado")
                 <div class="mt-4 alert alert-success" role="alert">
-                    <span class="text-dark">{{ json_decode($jsonData)->message }}</span>
+                    <span class="text-dark">Reposta enviada com sucesso</span>
                 </div>
             @else
                 <div class="mt-4 alert alert-danger" role="alert">
-                    <span class="text-dark">{{ json_decode($jsonData)->message }}</span>
+                    <span class="text-dark">Erro na operação</span>
                 </div>
             @endif
         @endif
