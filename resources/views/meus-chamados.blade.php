@@ -73,12 +73,15 @@
 
                                         <br>
 
+                                    @if($chamado->status == "Aberto" || $chamado->status == "Em andamento")
                                         <label for="descricao" class="form-label">Envie sua resposta</label>
                                         <textarea type="text" class="form-control" id="resposta" name="resposta" rows="2" ></textarea>
-
                                         <br>
-
                                         <button type="submit" class="btn btn-primary">Responder</button>
+                                    @else
+                                        <label for="descricao" class="form-label">Envie sua resposta</label>
+                                        <textarea type="text" class="form-control" id="resposta" name="resposta" rows="2" readonly></textarea>
+                                    @endif
                                     </form>
                                 </div>
                             </div>
