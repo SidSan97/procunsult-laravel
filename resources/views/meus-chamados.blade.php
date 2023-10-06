@@ -44,10 +44,46 @@
                         </td>
                         <td>
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?=$chamado->id?>">
-						        Ver chamado
+						        Ver historico
 					        </button>
                         </td>
                     </tr>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop<?=$chamado->id?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Historico do chamado</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <strong><span>HISTORICO DE RESPOSTA</span></strong> <br><br>
+
+                                    @foreach($chamado->historicoChamado as $historico)
+                                        <br> <span><strong>{{$historico->nivel}}:</strong> {{$historico->resposta}} - {{$historico->updated_at}}</span> <br>
+                                    @endforeach
+
+                                    <form action="/envio-resposta-cliente" method="post">
+                                        @csrf
+                                        <input type="hidden" name="chamado" value="{{$historico->chamado_id}}">
+                                        <input type="hidden" name="nivel" value="Cliente">
+                                        <input type="hidden" name="valor" value="{{$chamado->chamado_id_user}}">
+
+                                        <br>
+
+                                        <label for="descricao" class="form-label">Envie sua resposta</label>
+                                        <textarea type="text" class="form-control" id="resposta" name="resposta" rows="2" ></textarea>
+
+                                        <br>
+
+                                        <button type="submit" class="btn btn-primary">Responder</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
                 @endif
             </tbody>

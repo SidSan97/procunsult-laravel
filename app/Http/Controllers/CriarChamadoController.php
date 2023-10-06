@@ -7,6 +7,7 @@ use App\Models\CriarChamadoModel;
 use Illuminate\Http\Request;
 use Laravel\Jetstream\Jetstream;
 use App\Http\Controllers\Auth;
+use App\Models\HistoricoChamadaModel;
 
 class CriarChamadoController extends Controller
 {
@@ -46,6 +47,8 @@ class CriarChamadoController extends Controller
 
                 $this->upload($id, $arquivos, $qtdArquivos);
             }
+
+            $this->historicoChamado($request->descricao, "Cliente", $user->id);
 
             $response = [
                 'status' => 200,
@@ -89,5 +92,18 @@ class CriarChamadoController extends Controller
 
         return;
 
+    }
+
+    public function historicoChamado($descricao, $nivel, $id) {
+
+        $chamado = new HistoricoChamadaModel();
+
+        $chamado->resposta  = $descricao;
+        $chamado->nivel     = $nivel;
+        $chamado->chamado_id = $id;
+
+        $chamado->save();
+
+        return;
     }
 }

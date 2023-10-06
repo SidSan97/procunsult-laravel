@@ -10,4 +10,9 @@ class MeuChamadoModel extends Model
     protected $table = 'chamados';
 
     use HasFactory;
+
+    public function historicoChamado()
+    {
+        return $this->hasMany(HistoricoChamadaModel::class, 'chamado_id', 'id');
+    }
 }

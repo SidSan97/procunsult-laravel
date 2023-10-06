@@ -25,6 +25,7 @@ Route::get('/abrir-chamado',[CriarChamadoController::class, 'index'])->middlewar
 Route::get('/responder-chamado',[ResponderChamadoController::class, 'obterDados'])->middleware('auth');
 Route::put('/editar-chamado/{id}',[ResponderChamadoController::class, 'responderChamado'])->middleware('auth');
 Route::get('/meus-chamados/{id}',[MeuChamadosController::class, 'listarChamados'])->middleware('auth');
+Route::post('/envio-resposta-cliente',[MeuChamadosController::class, 'envioResposta'])->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',

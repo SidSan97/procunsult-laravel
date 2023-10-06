@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistoricoChamadaModel;
 use App\Models\ResponderChamadoModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,8 @@ class ResponderChamadoController extends Controller
 
         if($chamado->save()) {
 
+            $this->historicoChamado($request->input('resposta'), "Colaborador", $id);
+
             $response = [
                 'status' => 200,
                 'message' => "Reposta enviada com sucesso",
@@ -68,5 +71,18 @@ class ResponderChamadoController extends Controller
                 return view('/responder-chamado')->with('jsonData', json_encode($response));
             }
         }
+
+    public function historicoChamado($descricao, $nivel, $id) {
+
+        $chamado = new HistoricoChamadaModel();
+
+        $chamado->resposta   = $descricao;
+        $chamado->nivel      = $nivel;
+        $chamado->chamado_id = $id;
+
+        $chamado->save();
+
+        return;
+    }
 
 }
