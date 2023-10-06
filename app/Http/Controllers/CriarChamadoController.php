@@ -23,6 +23,10 @@ class CriarChamadoController extends Controller
                 'message' => "Você não tem permissão para acessar esta página",
             ];
 
+            /*return response()->json([
+               $response
+            ], 403);*/
+
             return view('home')->with('jsonData', json_encode($response));
         }
     }
@@ -55,6 +59,10 @@ class CriarChamadoController extends Controller
                 'message' => "Chamado aberto com sucesso",
             ];
 
+            /*return response()->json([
+               $response
+            ], 200);*/
+
             return view('abrir-chamado')->with('jsonData', json_encode($response));
 
         } else {
@@ -63,6 +71,10 @@ class CriarChamadoController extends Controller
                 'status' => 500,
                 'message' => "Erro ao processar a operação.",
             ];
+
+            /*return response()->json([
+               $response
+            ], 500);*/
 
             return view('abrir-chamado')->with('jsonData', json_encode($response));
 

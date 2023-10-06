@@ -23,6 +23,10 @@ class MeuChamadosController extends Controller
                     'dados'  => $chamados,
                 ];
 
+                /*return response()->json([
+               $response
+            ], 200);*/
+
                 return view('meus-chamados', compact('chamados'));
 
             } else {
@@ -31,6 +35,10 @@ class MeuChamadosController extends Controller
                     'status' => 404,
                     'dados'  => "Dados não encontrados",
                 ];
+
+                /*return response()->json([
+               $response
+            ], 404);*/
 
                 return view('meus-chamados')->with('jsonData', json_encode($response));
             }
@@ -41,6 +49,10 @@ class MeuChamadosController extends Controller
                 'status' => 403,
                 'message' => "Você não tem permissão para acessar esta página",
             ];
+
+            /*return response()->json([
+               $response
+            ], 403);*/
 
             return view('home')->with('jsonData', json_encode($response));
         }
@@ -56,10 +68,14 @@ class MeuChamadosController extends Controller
         $enviar = new CriarChamadoController;
         $enviar->historicoChamado($resposta, $nivel, $chamado);
 
-        $response = [
+        /*$response = [
             'status' => 200,
             'dados'  => "Resposta enviada com sucesso.",
         ];
+
+        return response()->json([
+               $response
+            ], 200);*/
 
         return redirect('/meus-chamados/'.$id);
     }

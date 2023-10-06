@@ -18,12 +18,25 @@ class ResponderChamadoController extends Controller
 
             return view('responder-chamado', compact('chamados'));
 
+            /*$response = [
+                'status' => 200,
+                'message' => $chamados,
+            ];
+
+            return response()->json([
+               $response
+            ], 200);*/
+
         } else {
 
             $response = [
                 'status' => 403,
                 'message' => "Você não tem permissão para acessar esta página",
             ];
+
+            /*return response()->json([
+               $response
+            ], 403);*/
 
             return view('home')->with('jsonData', json_encode($response));
         }
