@@ -19,7 +19,7 @@ Em seguida rode os seguintes comandos em sequência: <br>
 - php artisan serve
 - npm run dev
 
-Caso o npm run dev, rode o comando npm install e depois rode de novo o npm run dev
+Caso o npm run dev, rode o comando <i>npm install</i> e depois rode de novo o <i>npm run dev</i>
 
 ## License
 
