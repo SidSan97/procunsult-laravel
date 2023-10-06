@@ -34,6 +34,7 @@ class CriarChamadoController extends Controller
         $user->descricao = $request->descricao;
         $user->resposta  = $request->resposta;
         $user->status    = "Aberto";
+        $user->chamado_id_user = $request->valor;
 
         if($user->save()) {
 

@@ -17,7 +17,14 @@ return new class extends Migration
             $table->string('descricao');
             $table->string('resposta')->nullable();
             $table->string('status');
+            $table->unsignedBigInteger('chamado_id_user')->nullable();
             $table->timestamps();
+
+            // Definir a chave estrangeira
+             $table->foreign('chamado_id_user')
+             ->references('id')
+             ->on('users')
+             ->onDelete('set null');
         });
     }
 

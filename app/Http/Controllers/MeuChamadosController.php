@@ -8,7 +8,7 @@ class MeuChamadosController extends Controller
 {
     public function listarChamados($id)  {
 
-        $chamados = MeuChamadoModel::findOrfail($id);
+        $chamados = MeuChamadoModel::where('chamado_id_user', $id)->get();
 
         if($chamados) {
 
@@ -17,7 +17,7 @@ class MeuChamadosController extends Controller
                 'dados'  => $chamados,
             ];
 
-            return view('meus-chamados')->with('jsonData', json_encode($response));
+            return view('meus-chamados', compact('chamados'));
 
         } else {
 

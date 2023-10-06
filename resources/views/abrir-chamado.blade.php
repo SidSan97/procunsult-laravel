@@ -28,6 +28,7 @@
 
     <form action="/enviar-chamado" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="valor" value="{{Auth::user()->id}}">
         <div class="form-group">
             <label for="titulo">Titulo do chamado</label>
             <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Insira um nome para o chamado" required>
@@ -48,7 +49,8 @@
 
     <br>
 
-    <button type="submit" class="btn btn-warning"><a href="/" class="text-dark">Voltar</a></button>
+    <button type="button" class="btn btn-warning"><a href="/" class="text-dark">Voltar</a></button>
+    <button type="button" class="btn btn-success"><a href="/meus-chamados/{{Auth::user()->id}}" class="text-dark">Ver meus chamados</a></button>
 </div>
 
 <!-- Bootstrap -->
