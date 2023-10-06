@@ -21,6 +21,9 @@ Em seguida rode os seguintes comandos em sequência: <br>
 
 Caso o npm run dev dê erro, rode o comando <i>npm install</i> e depois rode de novo o <i>npm run dev</i>
 
+Caso queira testar o projeto como api, basta ir no controlador, comentar as linhas que renderizam a view 
+e descomentar as linhas que possui a saída em json
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
