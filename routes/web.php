@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CriarChamadoController;
+use App\Http\Controllers\MeuChamadosController;
 use App\Http\Controllers\ResponderChamadoController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::post('/enviar-chamado',[CriarChamadoController::class, 'abrirChamado'])->
 Route::get('/abrir-chamado',[CriarChamadoController::class, 'index'])->middleware('auth');;
 Route::get('/responder-chamado',[ResponderChamadoController::class, 'obterDados'])->middleware('auth');
 Route::put('/editar-chamado/{id}',[ResponderChamadoController::class, 'responderChamado'])->middleware('auth');
+Route::get('/meus-chamados/{id}',[MeuChamadosController::class, 'listarChamados'])->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',
