@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06-Out-2023 às 19:38
+-- Tempo de geração: 06-Out-2023 às 19:40
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 8.1.6
 
@@ -30,7 +30,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `anexos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `chamado_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `nome_anexo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `nome_anexo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
