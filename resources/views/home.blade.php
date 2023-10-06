@@ -8,6 +8,14 @@
 </head>
 <body>
 
+    @if(isset($jsonData))
+        @if(json_decode($jsonData)->status == 403)
+            <div class="mt-4 alert alert-success" role="alert">
+                <span class="text-dark">{{ json_decode($jsonData)->message }}</span>
+            </div>
+        @endif
+    @endif
+
     @guest
     <h1>Você precisa estar logado para usar o sistema</h1> <br>
 
@@ -20,13 +28,13 @@
     <br>
 
     @auth
-    <h1>Bem-vindo, {{$user = Auth::user()->name;}}</h1> <br>
-    <h3>Nivel: {{$user = Auth::user()->nivel;}}</h3>
+    <h1>Bem-vindo, {{ Auth::user()->name;}}</h1> <br>
+    <h3>Nivel: {{ Auth::user()->nivel;}}</h3>
 
     <div>
-        @if($user = Auth::user()->nivel == "Cliente")
+        @if( Auth::user()->nivel == "Cliente")
             <p><a href="/abrir-chamado">Abrir chamado</a></p>
-        @elseif($user = Auth::user()->nivel == "Colaborador")
+        @elseif( Auth::user()->nivel == "Colaborador")
             <p><a href="/responder-chamado">Responder chamado</a></p>
         @endif
     </div>

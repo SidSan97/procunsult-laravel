@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\AnexoModel;
 use App\Models\CriarChamadoModel;
 use Illuminate\Http\Request;
+use Laravel\Jetstream\Jetstream;
+use App\Http\Controllers\Auth;
 
 class CriarChamadoController extends Controller
 {
     public function index() {
 
-        return view('abrir-chamado');
+        if(auth()->user()->nivel == "Cliente") {
+            return view('abrir-chamado');
 
+        } else {
+
+            $response = [
+                'status' => 403,
+                'message' => "Você não tem permissão para acessar esta página",
+            ];
+
+            return view('home')->with('jsonData', json_encode($response));
+        }
     }
 
     public function abrirChamado(Request $request) {

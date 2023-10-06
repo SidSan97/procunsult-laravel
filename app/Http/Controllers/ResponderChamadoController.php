@@ -9,16 +9,23 @@ use Illuminate\Support\Facades\DB;
 
 class ResponderChamadoController extends Controller
 {
-    public function index() {
-
-        return view('responder-chamado');
-    }
 
     public function obterDados() {
 
-        $chamados = ResponderChamadoModel::with('anexos')->get();
+        if(auth()->user()->nivel == "Colaborador") {
+            $chamados = ResponderChamadoModel::with('anexos')->get();
 
-        return view('responder-chamado', compact('chamados'));
+            return view('responder-chamado', compact('chamados'));
+
+        } else {
+
+            $response = [
+                'status' => 403,
+                'message' => "Você não tem permissão para acessar esta página",
+            ];
+
+            return view('home')->with('jsonData', json_encode($response));
+        }
     }
 
     public function responderChamado(Request $request, $id) {

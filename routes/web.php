@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::post('/enviar-chamado',[CriarChamadoController::class, 'abrirChamado']);
-Route::get('/abrir-chamado',[CriarChamadoController::class, 'index']);
+Route::post('/enviar-chamado',[CriarChamadoController::class, 'abrirChamado'])->middleware('auth');;
+Route::get('/abrir-chamado',[CriarChamadoController::class, 'index'])->middleware('auth');;
 Route::get('/responder-chamado',[ResponderChamadoController::class, 'obterDados'])->middleware('auth');
 Route::put('/editar-chamado/{id}',[ResponderChamadoController::class, 'responderChamado'])->middleware('auth');
 
