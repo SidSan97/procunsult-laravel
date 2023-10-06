@@ -10,27 +10,39 @@ class MeuChamadosController extends Controller
 {
     public function listarChamados($id)  {
 
-        $chamados = MeuChamadoModel::with('historicoChamado')
-                ->where('chamado_id_user', $id)
-                ->get();
+        if(auth()->user()->nivel == "Cliente") {
 
-        if($chamados) {
+            $chamados = MeuChamadoModel::with('historicoChamado')
+                    ->where('chamado_id_user', $id)
+                    ->get();
 
-            $response = [
-                'status' => 200,
-                'dados'  => $chamados,
-            ];
+            if($chamados) {
 
-            return view('meus-chamados', compact('chamados'));
+                $response = [
+                    'status' => 200,
+                    'dados'  => $chamados,
+                ];
+
+                return view('meus-chamados', compact('chamados'));
+
+            } else {
+
+                $response = [
+                    'status' => 404,
+                    'dados'  => "Dados não encontrados",
+                ];
+
+                return view('meus-chamados')->with('jsonData', json_encode($response));
+            }
 
         } else {
 
             $response = [
-                'status' => 404,
-                'dados'  => "Dados não encontrados",
+                'status' => 403,
+                'message' => "Você não tem permissão para acessar esta página",
             ];
 
-            return view('meus-chamados')->with('jsonData', json_encode($response));
+            return view('home')->with('jsonData', json_encode($response));
         }
     }
 
