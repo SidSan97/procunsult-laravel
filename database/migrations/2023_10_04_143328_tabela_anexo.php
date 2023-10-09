@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('chamado_id')->nullable();
             $table->string('nome_anexo')->nullable();
+            $table->timestamps();
 
             // Definir a chave estrangeira
             $table->foreign('chamado_id')
